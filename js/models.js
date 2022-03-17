@@ -72,26 +72,29 @@ class StoryList {
    * Returns the new Story instance
    */
 
-  async addStory( user, newStory ) {
+  async addStory(user, newStory) {
+
     const token = user.loginToken;
+
     const author = newStory.author;
     const title = newStory.title;
     const storyURL = newStory.url;
 
     const response = await axios({
-      url : `${BASE_URL}/stories`,
-      method : "POST",
-      data: { story : {
-        author : author,
-        title : title,
-        url : storyURL
-      }},
-      token : token
+      url: `${BASE_URL}/stories`,
+      method: "POST",
+      data: {
+        story: {
+          author: author,
+          title: title,
+          url: storyURL
+        },
+        token: token
+      },
     });
-    
-    return new Story(response.story);
-  }
 
+    return new Story(response.data.story);
+  }
 }
 
 
@@ -106,13 +109,13 @@ class User {
    */
 
   constructor({
-                username,
-                name,
-                createdAt,
-                favorites = [],
-                ownStories = []
-              },
-              token) {
+    username,
+    name,
+    createdAt,
+    favorites = [],
+    ownStories = []
+  },
+    token) {
     this.username = username;
     this.name = name;
     this.createdAt = createdAt;
