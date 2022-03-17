@@ -94,7 +94,9 @@ class StoryList {
     });
 
     // store new story in variable and push into story list
-    return new Story(response.data.story);
+    const story = new Story(response.data.story);
+    storyList.stories.unshift(story);
+    return story;
   }
 }
 

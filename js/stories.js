@@ -59,10 +59,14 @@ async function addStoryAndDisplay() {
   const author = $("#author-name").val();
   const url = $("#url").val();
 
-  const storyData = {title, author, url};
+  const storyData = { title, author, url };
 
   await storyList.addStory(currentUser, storyData);
+
   putStoriesOnPage();
+  
+  $storyForm.trigger("reset");
+  $storyForm.hide();
 }
 
 $storyForm.on("submit", addStoryAndDisplay);
