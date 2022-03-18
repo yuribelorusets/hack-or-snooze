@@ -52,18 +52,23 @@ function putStoriesOnPage() {
 }
 
 
-/** Adds a story to the page using data from addStoryForm inputs  */
+/** Adds a story to the page using data from addStoryForm inputs and pushes it to API */
 
-async function addStoryAndDisplay() {
+async function addStoryAndDisplay(evt) {
+  evt.preventDefault();
+
   const title = $("#title-name").val();
   const author = $("#author-name").val();
   const url = $("#url").val();
 
   const storyData = { title, author, url };
 
-  await storyList.addStory(currentUser, storyData);
+  const newStory = await storyList.addStory(currentUser, storyData);
 
-  putStoriesOnPage();
+  // putStoriesOnPage();   optimized to add just the new story
+
+  const $story = generateStoryMarkup(newStory);
+  $allStoriesList.prepend($story);
   
   $storyForm.trigger("reset");
   $storyForm.hide();

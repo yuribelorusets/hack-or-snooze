@@ -95,7 +95,7 @@ class StoryList {
 
     // store new story in variable and push into story list
     const story = new Story(response.data.story);
-    storyList.stories.unshift(story);
+    this.stories.unshift(story);
     return story;
   }
 }
@@ -214,5 +214,40 @@ class User {
       console.error("loginViaStoredCredentials failed", err);
       return null;
     }
+  }
+
+  async favoriteStory(story) {
+    const storyID = story.storyId;
+    const username = this.username;
+
+    const response = await axios({
+      url: `${BASE_URL}/users/${username}/favorites/${storyID}`,
+      method: "POST",
+      data: {
+        token : this.loginToken
+      }
+    });
+    
+    this.favorites.push(story);
+  }
+
+  async unfavoriteStory(story) {
+    const storyID = story.storyId;
+    const username = this.username;
+
+    const response = await axios({
+      url: `${BASE_URL}/users/${username}/favorites/${storyID}`,
+      method: "POST",
+      data: {
+        token : this.loginToken
+      }
+    });
+
+    for (let i = 0; i < this.favorites.length; i++){
+      if (this.favorites[i].storyId === storyID){
+        this.favorites.splice(i, 1);
+      }
+    }
+
   }
 }
