@@ -45,3 +45,14 @@ function displayNewStoryForm() {
 }
 
 $newStory.on("click", displayNewStoryForm);
+
+/** displays list of favorite stories */
+
+function displayFavorites() {
+  displayNewFav();
+  $favStoryList.show();
+  $allStoriesList.hide();
+}
+
+$navFavs.on("click", displayFavorites);
+

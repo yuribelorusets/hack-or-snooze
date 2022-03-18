@@ -120,16 +120,56 @@ function updateUIOnUserLogin() {
 
 
 async function addFavorite(evt) {
-  console.log("clicked");
-  const storyId = $(evt.target).closest("li").attr("id");
+  const $currBtn = $(evt.target);
+  const storyId = $currBtn.closest("li").attr("id");
+  const $unFavBtn = $currBtn.next();
+  
+
   const story = storyList.stories.find((s) => {
     return s.storyId === storyId;
   });
+
   currentUser.favoriteStory(story);
 
-  $(evt.target).toggle();
-  // console.log($unFavoriteBtn)
-  $unFavoriteBtn.toggle();
+  $currBtn.toggle();
+  $unFavBtn.toggle();
 }
 
 $allStoriesList.on("click", "#fav", addFavorite);
+
+async function removeFavorite(evt) {
+  const $currBtn = $(evt.target);
+  const storyId = $currBtn.closest("li").attr("id");
+  const $favBtn = $currBtn.prev();
+  
+
+  const story = storyList.stories.find((s) => {
+    return s.storyId === storyId;
+  });
+
+  currentUser.unfavoriteStory(story);
+
+  $currBtn.toggle();
+  $favBtn.toggle();
+}
+
+$allStoriesList.on("click", "#unfav", removeFavorite);
+
+function displayNewFav() {
+
+  $favStoryList.empty();
+
+  for (let story of currentUser.favorites) {
+    const $story = generateStoryMarkup(story);
+    const $favBtn = $story.find("#fav");
+    const $unfavBtn = $story.find("#unfav");
+
+    $favBtn.toggle();
+    $unfavBtn.toggle();
+    $favStoryList.append($story);
+  }
+
+}
+
+$favStoryList.on("click", "#unfav", removeFavorite);
+$favStoryList.on("click", "#fav", addFavorite);

@@ -26,7 +26,7 @@ function generateStoryMarkup(story) {
   return $(`
       <li id="${story.storyId}">
       <i id="fav" class="fa-regular fa-star"></i>
-      <i id="unfav" class="fa-solid fa-star hidden"></i>
+      <i id="unfav" class="fa-solid fa-star" style="display: none"></i>
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
         </a>
@@ -77,4 +77,6 @@ async function addStoryAndDisplay(evt) {
 }
 
 $storyForm.on("submit", addStoryAndDisplay);
+
+
 
