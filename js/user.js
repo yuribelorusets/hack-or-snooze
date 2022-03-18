@@ -114,3 +114,22 @@ function updateUIOnUserLogin() {
 
   updateNavOnLogin();
 }
+
+
+/** function that takes in evt and delegates on to all favorite buttons evt listener on main list button parameter. */
+
+
+async function addFavorite(evt) {
+  console.log("clicked");
+  const storyId = $(evt.target).closest("li").attr("id");
+  const story = storyList.stories.find((s) => {
+    return s.storyId === storyId;
+  });
+  currentUser.favoriteStory(story);
+
+  $(evt.target).toggle();
+  // console.log($unFavoriteBtn)
+  $unFavoriteBtn.toggle();
+}
+
+$allStoriesList.on("click", "#fav", addFavorite);

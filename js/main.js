@@ -17,6 +17,10 @@ const $newStory = $("#nav-submit-link");
 
 const $storyForm = $("#new-story-form");
 
+const $favoriteBtn = $("#fav");
+const $unFavoriteBtn = $("#unfav");
+const unfav = document.getElementById("#unfav")
+
 /** To make it easier for individual components to show just themselves, this
  * is a useful function that hides pretty much everything on the page. After
  * calling this, individual components can re-show just what they want.

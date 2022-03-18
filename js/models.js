@@ -224,12 +224,13 @@ class User {
       url: `${BASE_URL}/users/${username}/favorites/${storyID}`,
       method: "POST",
       data: {
-        token : this.loginToken
+        token: this.loginToken
       }
     });
-    
+
     this.favorites.push(story);
   }
+
 
   async unfavoriteStory(story) {
     const storyID = story.storyId;
@@ -239,12 +240,12 @@ class User {
       url: `${BASE_URL}/users/${username}/favorites/${storyID}`,
       method: "POST",
       data: {
-        token : this.loginToken
+        token: this.loginToken
       }
     });
 
-    for (let i = 0; i < this.favorites.length; i++){
-      if (this.favorites[i].storyId === storyID){
+    for (let i = 0; i < this.favorites.length; i++) {
+      if (this.favorites[i].storyId === storyID) {
         this.favorites.splice(i, 1);
       }
     }
