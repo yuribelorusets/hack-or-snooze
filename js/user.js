@@ -25,6 +25,8 @@ async function login(evt) {
 
   saveUserCredentialsInLocalStorage();
   updateUIOnUserLogin();
+  // reloads page to mark favorites
+  location.reload();
 }
 
 $loginForm.on("submit", login);
@@ -116,7 +118,7 @@ function updateUIOnUserLogin() {
 }
 
 
-/** function that takes in evt and delegates on to all favorite buttons evt listener on main list button parameter. */
+/** when story is favorited, adds to current user's favorite list */
 
 
 async function addFavorite(evt) {
@@ -169,13 +171,9 @@ function populateFavoritesList() {
     $favStoryList.append($story);
   }
 
-  if($favStoryList.children().length === 0){
-    $noFavsMsg.css("display", "block");
-  }
-
-  if($favStoryList.children().length > 0){
-    $noFavsMsg.css("display", "none");
-  }
+  ($favStoryList.children().length === 0) 
+    ? $noFavsMsg.css("display", "block") 
+    : $noFavsMsg.css("display", "none");
 }
 
 $body.on("click", "#unfav", removeFavorite);

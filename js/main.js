@@ -48,6 +48,7 @@ async function start() {
 
   // if we got a logged-in user
   if (currentUser) updateUIOnUserLogin();
+  
 }
 
 // Once the DOM is entirely loaded, begin the app

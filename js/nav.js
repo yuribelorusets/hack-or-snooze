@@ -45,7 +45,7 @@ function displayNewStoryForm() {
 
   if($favStoryList.is(":visible")){
     $favStoryList.toggle();
-    $allStoriesList.toggle();
+    $allStoriesList.show();
   }
 }
 
@@ -57,6 +57,8 @@ function displayFavorites() {
   populateFavoritesList();
   $favStoryList.show();
   $allStoriesList.hide();
+  $loginForm.hide();
+  $signupForm.hide();
 
   if($storyForm.is(":visible")){
     $storyForm.toggle();

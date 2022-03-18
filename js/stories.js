@@ -50,11 +50,17 @@ function putStoriesOnPage() {
     const $favBtn = $story.find("#fav");
     const $unfavBtn = $story.find("#unfav");
 
-    if(currentUser.favorites.includes(story)){
-
-      $favBtn.toggle();
-      $unfavBtn.toggle();
+    // if user is logged in, marks favorited stories on main story list
+    if (currentUser){
+      for (let i = 0; i < currentUser.favorites.length; i++){
+        if (currentUser.favorites[i].storyId === story.storyId){
+          console.log("works");
+          $favBtn.hide();
+          $unfavBtn.show();
+        }
+      }
     }
+
     $allStoriesList.append($story);
   }
   $allStoriesList.show();
@@ -73,8 +79,6 @@ async function addStoryAndDisplay(evt) {
   const storyData = { title, author, url };
 
   const newStory = await storyList.addStory(currentUser, storyData);
-
-  // putStoriesOnPage();   optimized to add just the new story
 
   const $story = generateStoryMarkup(newStory);
   $allStoriesList.prepend($story);
