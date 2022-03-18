@@ -47,9 +47,16 @@ function putStoriesOnPage() {
   // loop through all of our stories and generate HTML for them
   for (let story of storyList.stories) {
     const $story = generateStoryMarkup(story);
+    const $favBtn = $story.find("#fav");
+    const $unfavBtn = $story.find("#unfav");
+
+    if(currentUser.favorites.includes(story)){
+
+      $favBtn.toggle();
+      $unfavBtn.toggle();
+    }
     $allStoriesList.append($story);
   }
-
   $allStoriesList.show();
 }
 

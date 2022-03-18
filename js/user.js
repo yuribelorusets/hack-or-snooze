@@ -123,7 +123,7 @@ async function addFavorite(evt) {
   const $currBtn = $(evt.target);
   const storyId = $currBtn.closest("li").attr("id");
   const $unFavBtn = $currBtn.next();
-  
+
 
   const story = storyList.stories.find((s) => {
     return s.storyId === storyId;
@@ -135,13 +135,13 @@ async function addFavorite(evt) {
   $unFavBtn.toggle();
 }
 
-$allStoriesList.on("click", "#fav", addFavorite);
+/** remove favorite from users favorite list */
 
 async function removeFavorite(evt) {
   const $currBtn = $(evt.target);
   const storyId = $currBtn.closest("li").attr("id");
   const $favBtn = $currBtn.prev();
-  
+
 
   const story = storyList.stories.find((s) => {
     return s.storyId === storyId;
@@ -153,9 +153,9 @@ async function removeFavorite(evt) {
   $favBtn.toggle();
 }
 
-$allStoriesList.on("click", "#unfav", removeFavorite);
+/** Create markup for each favorite story and appends to favorites list */
 
-function displayNewFav() {
+function populateFavoritesList() {
 
   $favStoryList.empty();
 
@@ -169,7 +169,14 @@ function displayNewFav() {
     $favStoryList.append($story);
   }
 
+  if($favStoryList.children().length === 0){
+    $noFavsMsg.css("display", "block");
+  }
+
+  if($favStoryList.children().length > 0){
+    $noFavsMsg.css("display", "none");
+  }
 }
 
-$favStoryList.on("click", "#unfav", removeFavorite);
-$favStoryList.on("click", "#fav", addFavorite);
+$body.on("click", "#unfav", removeFavorite);
+$body.on("click", "#fav", addFavorite);

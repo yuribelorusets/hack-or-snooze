@@ -12,3 +12,9 @@
 .account-forms-container {
   padding-left: 20px;
 }
+
+/* No favorites message style */
+
+.no-favs {
+  text-align: center;
+}

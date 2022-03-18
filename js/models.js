@@ -216,11 +216,13 @@ class User {
     }
   }
 
+/** Adds favorite story to server and to users favorite story list */
+
   async favoriteStory(story) {
     const storyID = story.storyId;
     const username = this.username;
 
-    const response = await axios({
+    await axios({
       url: `${BASE_URL}/users/${username}/favorites/${storyID}`,
       method: "POST",
       data: {
@@ -231,14 +233,15 @@ class User {
     this.favorites.push(story);
   }
 
+  /** Removes favorite story from server and from users favorite list */
 
   async unfavoriteStory(story) {
     const storyID = story.storyId;
     const username = this.username;
 
-    const response = await axios({
+    await axios({
       url: `${BASE_URL}/users/${username}/favorites/${storyID}`,
-      method: "POST",
+      method: "DELETE",
       data: {
         token: this.loginToken
       }
@@ -249,6 +252,5 @@ class User {
         this.favorites.splice(i, 1);
       }
     }
-
   }
 }

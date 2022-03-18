@@ -21,3 +21,12 @@ nav {
   margin-left: auto;
   text-align: right;
 }
+
+.pipe {
+  margin: 0 2px;
+}
+
+.nav-submit-link, .nav-favorites-link{
+  font-weight: bold;
+  font-size: .85rem;
+}

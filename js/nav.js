@@ -42,6 +42,11 @@ function updateNavOnLogin() {
 function displayNewStoryForm() {
   console.debug("displayNewStoryForm");
   $storyForm.show();
+
+  if($favStoryList.is(":visible")){
+    $favStoryList.toggle();
+    $allStoriesList.toggle();
+  }
 }
 
 $newStory.on("click", displayNewStoryForm);
@@ -49,9 +54,13 @@ $newStory.on("click", displayNewStoryForm);
 /** displays list of favorite stories */
 
 function displayFavorites() {
-  displayNewFav();
+  populateFavoritesList();
   $favStoryList.show();
   $allStoriesList.hide();
+
+  if($storyForm.is(":visible")){
+    $storyForm.toggle();
+  }
 }
 
 $navFavs.on("click", displayFavorites);
