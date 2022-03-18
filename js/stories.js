@@ -54,7 +54,7 @@ function putStoriesOnPage() {
     if (currentUser){
       for (let i = 0; i < currentUser.favorites.length; i++){
         if (currentUser.favorites[i].storyId === story.storyId){
-          console.log("works");
+    
           $favBtn.hide();
           $unfavBtn.show();
         }
